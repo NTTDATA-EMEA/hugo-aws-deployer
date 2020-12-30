@@ -44,3 +44,29 @@ AWS_SECRET_ACCESS_KEY
 S3_BUCKET
 CLOUDFRONT_DISTRIBUTION
 ```
+
+The AWS keys need to point to a user with the following permissions:
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:ListBucket",
+                "s3:DeleteObject",
+                "cloudfront:CreateInvalidation"
+            ],
+            "Resource": [
+                "arn:aws:s3:::${S3_BUCKET}/*",
+                "arn:aws:s3:::${S3_BUCKET}",
+                "arn:aws:cloudfront::680260899871:distribution/${CLOUDFRONT_DISTRIBUTION}"
+            ]
+        }
+    ]
+}
+```
